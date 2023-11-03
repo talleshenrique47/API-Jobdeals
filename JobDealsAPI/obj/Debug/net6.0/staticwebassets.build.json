@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "MOd3XHaTFge0lG5a47eDpBt0K5nu3qKTf5r2ZrBZ5IA=",
+  "Source": "JobDealsAPI",
+  "BasePath": "_content/JobDealsAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

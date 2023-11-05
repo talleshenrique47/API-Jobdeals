@@ -128,3 +128,4 @@ C:\Users\talle\Documents\JobDeals 07-11\Backend\JobDealsAPI\JobDealsAPI\obj\Debu
 C:\Users\talle\Documents\JobDeals 07-11\Backend\JobDealsAPI\JobDealsAPI\obj\Debug\net6.0\JobDealsAPI.pdb
 C:\Users\talle\Documents\JobDeals 07-11\Backend\JobDealsAPI\JobDealsAPI\obj\Debug\net6.0\JobDealsAPI.genruntimeconfig.cache
 C:\Users\talle\Documents\JobDeals 07-11\Backend\JobDealsAPI\JobDealsAPI\obj\Debug\net6.0\ref\JobDealsAPI.dll
+C:\Users\talle\Documents\JobDeals 07-11\Backend\JobDealsAPI\JobDealsAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

@@ -1,7 +1,11 @@
 using JobDealsAPI.Data;
 using JobDealsAPI.Repositories;
 using JobDealsAPI.Repositories.Interfaces;
+using JobDealsAPI.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace JobDealsAPI
 {
@@ -30,6 +34,27 @@ namespace JobDealsAPI
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<ITarefaRepository, TarefaRepository>();
 
+            var key = Encoding.ASCII.GetBytes(Settings.Secret);
+            builder.Services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+            builder.Services.AddScoped<TokenService>();
+
 
             var app = builder.Build();
 
@@ -44,8 +69,9 @@ namespace JobDealsAPI
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
 
+            app.UseAuthorization();
 
             app.MapControllers();
 

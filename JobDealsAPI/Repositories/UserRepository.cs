@@ -18,6 +18,11 @@ namespace JobDealsAPI.Repositories
             return await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<UserModel> GetLogin (string email, string password)
+        {
+            return await _dbContext.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower() && x.Password == password);
+        }
+
         public async Task<List<UserModel>> SeachAllUsers()
         {
             return await _dbContext.Users.ToListAsync();

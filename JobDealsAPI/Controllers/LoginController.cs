@@ -20,6 +20,7 @@ namespace JobDealsAPI.Controllers
             _userRepository = userRepository;
             _tokenService = tokenService; // TokenService é injetado no construtor
         }
+
         [HttpPost]
         [Route("login")]
         public async Task<ActionResult<dynamic>> AuthenticateAsync([FromBody] UserModel userModel)

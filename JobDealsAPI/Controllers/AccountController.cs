@@ -1,11 +1,13 @@
 ﻿using JobDealsAPI.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace JobDealsAPI.Controllers
 {
     [ApiController]
+    [EnableCors("corsapp")]
     public class AccountController : ControllerBase
     {
         [HttpGet]

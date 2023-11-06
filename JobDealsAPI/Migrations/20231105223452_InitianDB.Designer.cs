@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobDealsAPI.Migrations
 {
     [DbContext(typeof(JobDealsDBContex))]
-    [Migration("20231029191333_InitialDB")]
-    partial class InitialDB
+    [Migration("20231105223452_InitianDB")]
+    partial class InitianDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace JobDealsAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("JobDealsAPI.Models.TarefaModel", b =>
+            modelBuilder.Entity("JobDealsAPI.Models.DescriptionModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,7 +51,7 @@ namespace JobDealsAPI.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Tarefas");
+                    b.ToTable("Description");
                 });
 
             modelBuilder.Entity("JobDealsAPI.Models.UserModel", b =>
@@ -87,7 +87,7 @@ namespace JobDealsAPI.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("JobDealsAPI.Models.TarefaModel", b =>
+            modelBuilder.Entity("JobDealsAPI.Models.DescriptionModel", b =>
                 {
                     b.HasOne("JobDealsAPI.Models.UserModel", "User")
                         .WithMany()

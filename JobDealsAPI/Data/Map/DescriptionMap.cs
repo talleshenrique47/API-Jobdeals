@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JobDealsAPI.Data.Map
 {
-    public class TarefaMap : IEntityTypeConfiguration<TarefaModel>
+    public class DescriptionMap : IEntityTypeConfiguration<DescriptionModel>
     {
-        public void Configure(EntityTypeBuilder<TarefaModel> builder)
+        public void Configure(EntityTypeBuilder<DescriptionModel> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).IsRequired().HasMaxLength(255);

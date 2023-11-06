@@ -32,7 +32,7 @@ namespace JobDealsAPI
                 );
 
             builder.Services.AddScoped<IUserRepository, UserRepository>();
-            builder.Services.AddScoped<ITarefaRepository, TarefaRepository>();
+            builder.Services.AddScoped<IDescriptionRepository, DescriptionRepository>();
 
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
             builder.Services.AddAuthentication(x =>

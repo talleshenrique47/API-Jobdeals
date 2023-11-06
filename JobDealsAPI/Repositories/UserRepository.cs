@@ -30,6 +30,11 @@ namespace JobDealsAPI.Repositories
 
         public async Task<UserModel> Add(UserModel user)
         {
+            if (await _dbContext.Users.AnyAsync(x => x.Email.ToLower() == user.Email.ToLower()))
+            {
+                throw new Exception("O email já está cadastrado.");
+            }
+
             await _dbContext.Users.AddAsync(user);
             await _dbContext.SaveChangesAsync();
             return user;

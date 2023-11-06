@@ -4,7 +4,7 @@
 
 namespace JobDealsAPI.Migrations
 {
-    public partial class InitialDB : Migration
+    public partial class InitianDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,7 +25,7 @@ namespace JobDealsAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tarefas",
+                name: "Description",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -37,24 +37,24 @@ namespace JobDealsAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tarefas", x => x.Id);
+                    table.PrimaryKey("PK_Description", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tarefas_Users_UserId",
+                        name: "FK_Description_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tarefas_UserId",
-                table: "Tarefas",
+                name: "IX_Description_UserId",
+                table: "Description",
                 column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Tarefas");
+                name: "Description");
 
             migrationBuilder.DropTable(
                 name: "Users");

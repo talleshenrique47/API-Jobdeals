@@ -2,7 +2,7 @@
 
 namespace JobDealsAPI.Enums
 {
-    public enum StatusTarefa
+    public enum StatusDescription
     {
         [Description("A Fazer")]
         AFazer = 1,

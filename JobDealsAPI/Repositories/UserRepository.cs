@@ -30,14 +30,31 @@ namespace JobDealsAPI.Repositories
 
         public async Task<UserModel> Add(UserModel user)
         {
-            if (await _dbContext.Users.AnyAsync(x => x.Email.ToLower() == user.Email.ToLower()))
+            try
             {
-                throw new Exception("O email já está cadastrado.");
-            }
+                if (await _dbContext.Users.AnyAsync(x => x.Email.ToLower() == user.Email.ToLower()))
+                {
+                    throw new Exception("O email já está cadastrado.");
+                }
 
-            await _dbContext.Users.AddAsync(user);
-            await _dbContext.SaveChangesAsync();
-            return user;
+                await _dbContext.Users.AddAsync(user);
+
+                var profile = new ProfileModel
+                {
+                    UserName = user.Name,
+                    UserEmail = user.Email
+                };
+
+                await _dbContext.Profiles.AddAsync(profile);
+
+                await _dbContext.SaveChangesAsync();
+
+                return user;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao adicionar o usuário: {ex.Message}");
+            }
         }
 
         public async Task<UserModel> Update(UserModel user, int id)
@@ -49,8 +66,7 @@ namespace JobDealsAPI.Repositories
                 throw new Exception($"Usuário para o ID: {id} Não foi encontrado no banco de dados.");
             }
 
-            userById.FirstName = user.FirstName;
-            userById.LastName = user.LastName;
+            userById.Name = user.Name;
             userById.Email = user.Email;
             userById.Password = user.Password;
 

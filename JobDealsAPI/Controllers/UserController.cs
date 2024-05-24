@@ -1,5 +1,6 @@
 ﻿using JobDealsAPI.Models;
 using JobDealsAPI.Repositories.Interfaces;
+using JobDealsAPI.Services;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +13,12 @@ namespace JobDealsAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
-        public UserController(IUserRepository userRepository)
+        private readonly TokenService _tokenService;
+
+        public UserController(IUserRepository userRepository, TokenService tokenService)
         {
             _userRepository = userRepository;
+            _tokenService = tokenService;
         }
 
 
@@ -35,8 +39,24 @@ namespace JobDealsAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<UserModel>> AddUser([FromBody] UserModel userModel)
         {
-            UserModel user = await _userRepository.Add(userModel);
-            return Ok(user);
+            try
+            {
+                var profile = new ProfileModel
+                {
+                    UserName = userModel.Name,
+                    UserEmail = userModel.Email
+                };
+
+                userModel.Profile = profile;
+
+                UserModel user = await _userRepository.Add(userModel);
+
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao criar o usuário: {ex.Message}");
+            }
         }
 
         [HttpPut("{id}")]

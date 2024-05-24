@@ -13,12 +13,13 @@ namespace JobDealsAPI.Data
         }
         
         public DbSet<UserModel> Users { get; set; }
-        public DbSet<DescriptionModel> Description { get; set; }
+        public DbSet<ProfileModel> Profiles { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserMap());
-            modelBuilder.ApplyConfiguration(new DescriptionMap());
+            modelBuilder.ApplyConfiguration(new ProfileMap ());
 
             modelBuilder.Entity<UserModel>()
                 .HasIndex(u => u.Email)

@@ -11,23 +11,23 @@ namespace JobDealsAPI.Controllers
     public class AccountController : ControllerBase
     {
         [HttpGet]
-        [Route("anonymous")]
-        [AllowAnonymous]
-        public string Anonymous() => "Anônimo";
-
-        [HttpGet]
         [Route("authenticated")]
         [Authorize]
         public string Authenticated() => $"Autenticado - {User.Identity.Name}";
 
         [HttpGet]
-        [Route("employee")]
-        [Authorize(Roles = "employee, manager")]
-        public string Employee() => "Funcionário";
+        [Route("candidate")]
+        [Authorize(Roles = "candidate, admin")]
+        public string Candidate() => "Candidato";
 
         [HttpGet]
-        [Route("manager")]
-        [Authorize(Roles = "manager")]
-        public string Manager() => "Gerente";
+        [Route("company")]
+        [Authorize(Roles = "company, admin")]
+        public string Company() => "Empresa";
+
+        [HttpGet]
+        [Route("admin")]
+        [Authorize(Roles = "admin")]
+        public string Admin() => "Administrador";
     }
 }

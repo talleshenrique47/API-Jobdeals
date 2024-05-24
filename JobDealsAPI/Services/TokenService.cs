@@ -20,7 +20,7 @@ namespace JobDealsAPI.Services
                 {
                     new Claim(ClaimTypes.Email, user.Email.ToString()),
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                    new Claim(ClaimTypes.Name, user.FirstName.ToString() + " " + user.LastName.ToString())
+                    new Claim(ClaimTypes.Name, user.Name.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

@@ -1,4 +1,5 @@
 ﻿using JobDealsAPI.Models;
+using JobDealsAPI.Models.Dtos;
 
 namespace JobDealsAPI.Repositories.Interfaces
 {

@@ -4,13 +4,15 @@ namespace JobDealsAPI.Enums
 {
     public enum StatusDescription
     {
+        [Description("Vazio")]
+        SemStatus = 1,
         [Description("Dev Sênior")]
-        DevSenior = 1,
+        DevSenior = 2,
         [Description("Dev Pleno")]
-        DevPleno = 2,
+        DevPleno = 3,
         [Description("Dev Junior")]
-        DevJunior = 3,
+        DevJunior = 4,
         [Description("Estagiário")]
-        Estagiario = 4
+        Estagiario = 5
     }
 }

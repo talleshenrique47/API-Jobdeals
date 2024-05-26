@@ -18,7 +18,7 @@ namespace JobDealsAPI.Repositories
             return await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<UserModel> GetLogin (string email, string password)
+        public async Task<UserModel> GetLogin(string email, string password)
         {
             return await _dbContext.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower() && x.Password == password);
         }
@@ -39,14 +39,6 @@ namespace JobDealsAPI.Repositories
 
                 await _dbContext.Users.AddAsync(user);
 
-                var profile = new ProfileModel
-                {
-                    UserName = user.Name,
-                    UserEmail = user.Email
-                };
-
-                await _dbContext.Profiles.AddAsync(profile);
-
                 await _dbContext.SaveChangesAsync();
 
                 return user;
@@ -61,7 +53,7 @@ namespace JobDealsAPI.Repositories
         {
             UserModel userById = await SeachById(id);
 
-            if(userById == null)
+            if (userById == null)
             {
                 throw new Exception($"Usuário para o ID: {id} Não foi encontrado no banco de dados.");
             }
@@ -92,3 +84,4 @@ namespace JobDealsAPI.Repositories
         }
     }
 }
+

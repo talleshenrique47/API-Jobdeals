@@ -14,7 +14,6 @@ namespace JobDealsAPI.Models
         public string? Email { get; set; }
         public string? Password { get; set; }
 
-
-        public ProfileModel Profile { get; set; }
+        public ProfileModel? Profile { get; set; }
     }
 }

@@ -41,14 +41,6 @@ namespace JobDealsAPI.Controllers
         {
             try
             {
-                var profile = new ProfileModel
-                {
-                    UserName = userModel.Name,
-                    UserEmail = userModel.Email
-                };
-
-                userModel.Profile = profile;
-
                 UserModel user = await _userRepository.Add(userModel);
 
                 return Ok(user);

@@ -1,4 +1,5 @@
 ﻿using JobDealsAPI.Models;
+using JobDealsAPI.Models.Dtos;
 using JobDealsAPI.Repositories;
 using JobDealsAPI.Repositories.Interfaces;
 using JobDealsAPI.Services;
@@ -23,20 +24,25 @@ namespace JobDealsAPI.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<ActionResult<dynamic>> AuthenticateAsync([FromBody] UserModel userModel)
+        public async Task<ActionResult<dynamic>> AuthenticateAsync([FromBody] LoginRequestModel loginRequestModel)
         {
-            UserModel user = await _userRepository.GetLogin(userModel.Email, userModel.Password);
+            UserModel user = await _userRepository.GetLogin(loginRequestModel.Email, loginRequestModel.Password);
 
             if (user == null)
             {
                 return NotFound(new { message = "Usuário ou senha inválidos" });
             }
 
-            var token = _tokenService.GenerateToken(user);
+            UserDTO userDTO = new UserDTO
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Name = user.Name,
+            };
 
-            user.Password = "";
+            var token = _tokenService.GenerateToken(userDTO);
 
-            return new { user = user, token = token };
+            return new { user = userDTO, token = token };
         }
     }
 }

@@ -34,6 +34,7 @@ namespace JobDealsAPI.Repositories
             return profile;
         }
 
+
         public async Task<ProfileModel> Update(ProfileModel profile, int id)
         {
             ProfileModel profileById = await SeachById(id);
@@ -43,6 +44,7 @@ namespace JobDealsAPI.Repositories
                 throw new Exception($"Descrição para o ID: {id} Não foi encontrado no banco de dados.");
             }
 
+            profileById.UserName = profile.UserName ?? profileById.UserName;
             profileById.Title = profile.Title;
             profileById.PhoneNumber = profile.PhoneNumber;
             profileById.Github = profile.Github;
@@ -52,6 +54,7 @@ namespace JobDealsAPI.Repositories
 
             return profileById;
         }
+
 
         public async Task<bool> Delete(int id)
         {

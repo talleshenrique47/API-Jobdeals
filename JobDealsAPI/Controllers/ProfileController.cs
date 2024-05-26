@@ -1,4 +1,5 @@
 ﻿using JobDealsAPI.Models;
+using JobDealsAPI.Models.Dtos;
 using JobDealsAPI.Repositories;
 using JobDealsAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Cors;
@@ -39,7 +40,7 @@ namespace JobDealsAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ProfileModel>> PostProfile(int userId, ProfileModel profile)
+        public async Task<ActionResult<ProfileDTO>> PostProfile([FromQuery] int userId, [FromBody] ProfileModel profile)
         {
             if (userId != 0)
             {
@@ -51,10 +52,27 @@ namespace JobDealsAPI.Controllers
                     return NotFound("Usuário não encontrado");
                 }
 
+                // Preencher automaticamente as informações do usuário no perfil
+                profile.UserId = user.Id;
+                profile.UserEmail = user.Email;
+
                 var addProfile = await _profileRepository.Add(profile);
 
-                // Retornar a descrição do candidato recém-criada
-                return CreatedAtAction(nameof(GetProfile), new { id = addProfile.Id }, addProfile);
+                // Criar o DTO de retorno
+                var profileReturnDto = new ProfileDTO
+                {
+                    Id = addProfile.Id,
+                    PhotoPath = addProfile.PhotoPath,
+                    UserName = addProfile.UserName,
+                    Title = addProfile.Title,
+                    StatusDescription = addProfile.StatusDescription,
+                    PhoneNumber = addProfile.PhoneNumber,
+                    UserEmail = addProfile.UserEmail,
+                    Github = addProfile.Github
+                };
+
+                // Retornar o perfil recém-criado usando DTO
+                return CreatedAtAction(nameof(GetProfile), new { id = profileReturnDto.Id }, profileReturnDto);
             }
             else
             {
@@ -62,6 +80,8 @@ namespace JobDealsAPI.Controllers
                 return BadRequest("ID do usuário não fornecido");
             }
         }
+
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProfile(int id, ProfileModel profile)

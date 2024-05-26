@@ -15,8 +15,7 @@ namespace JobDealsAPI.Models
         public string? UserEmail { get; set; }
         public string? Github {  get; set; }
 
-        [ForeignKey("User")]
-        public int UserId { get; set; }
+        public int UserId { get; set; }       
         public UserModel? User { get; set; } // Referência ao usuário
     }
 }

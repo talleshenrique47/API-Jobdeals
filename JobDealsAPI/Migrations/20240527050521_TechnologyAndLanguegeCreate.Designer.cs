@@ -4,6 +4,7 @@ using JobDealsAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobDealsAPI.Migrations
 {
     [DbContext(typeof(JobDealsDBContex))]
-    partial class JobDealsDBContexModelSnapshot : ModelSnapshot
+    [Migration("20240527050521_TechnologyAndLanguegeCreate")]
+    partial class TechnologyAndLanguegeCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,37 +45,6 @@ namespace JobDealsAPI.Migrations
                         .IsUnique();
 
                     b.ToTable("Abouts");
-                });
-
-            modelBuilder.Entity("JobDealsAPI.Models.AcademicFormationModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CompletionDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Course")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Institution")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<int>("ProfileId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProfileId");
-
-                    b.ToTable("AcademicFormations");
                 });
 
             modelBuilder.Entity("JobDealsAPI.Models.CertificationModel", b =>
@@ -139,29 +110,6 @@ namespace JobDealsAPI.Migrations
                     b.HasIndex("ProfileId");
 
                     b.ToTable("Experiences");
-                });
-
-            modelBuilder.Entity("JobDealsAPI.Models.HardSkillModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("HardSkillName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("ProfileId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProfileId");
-
-                    b.ToTable("HardSkills");
                 });
 
             modelBuilder.Entity("JobDealsAPI.Models.LanguageModel", b =>
@@ -255,29 +203,6 @@ namespace JobDealsAPI.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("JobDealsAPI.Models.SoftSkillModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("ProfileId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SoftSkillName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProfileId");
-
-                    b.ToTable("SoftSkills");
-                });
-
             modelBuilder.Entity("JobDealsAPI.Models.TechnologyModel", b =>
                 {
                     b.Property<int>("Id")
@@ -342,17 +267,6 @@ namespace JobDealsAPI.Migrations
                     b.Navigation("Profile");
                 });
 
-            modelBuilder.Entity("JobDealsAPI.Models.AcademicFormationModel", b =>
-                {
-                    b.HasOne("JobDealsAPI.Models.ProfileModel", "Profile")
-                        .WithMany("AcademicFormations")
-                        .HasForeignKey("ProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Profile");
-                });
-
             modelBuilder.Entity("JobDealsAPI.Models.CertificationModel", b =>
                 {
                     b.HasOne("JobDealsAPI.Models.ProfileModel", "Profile")
@@ -368,17 +282,6 @@ namespace JobDealsAPI.Migrations
                 {
                     b.HasOne("JobDealsAPI.Models.ProfileModel", "Profile")
                         .WithMany("Experiences")
-                        .HasForeignKey("ProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Profile");
-                });
-
-            modelBuilder.Entity("JobDealsAPI.Models.HardSkillModel", b =>
-                {
-                    b.HasOne("JobDealsAPI.Models.ProfileModel", "Profile")
-                        .WithMany("HardSkills")
                         .HasForeignKey("ProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -419,17 +322,6 @@ namespace JobDealsAPI.Migrations
                     b.Navigation("Profile");
                 });
 
-            modelBuilder.Entity("JobDealsAPI.Models.SoftSkillModel", b =>
-                {
-                    b.HasOne("JobDealsAPI.Models.ProfileModel", "Profile")
-                        .WithMany("SoftSkills")
-                        .HasForeignKey("ProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Profile");
-                });
-
             modelBuilder.Entity("JobDealsAPI.Models.TechnologyModel", b =>
                 {
                     b.HasOne("JobDealsAPI.Models.ProfileModel", "Profile")
@@ -445,19 +337,13 @@ namespace JobDealsAPI.Migrations
                 {
                     b.Navigation("About");
 
-                    b.Navigation("AcademicFormations");
-
                     b.Navigation("Certifications");
 
                     b.Navigation("Experiences");
 
-                    b.Navigation("HardSkills");
-
                     b.Navigation("Languages");
 
                     b.Navigation("Projects");
-
-                    b.Navigation("SoftSkills");
 
                     b.Navigation("Technologies");
                 });

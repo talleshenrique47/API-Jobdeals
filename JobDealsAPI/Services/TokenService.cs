@@ -23,7 +23,7 @@ namespace JobDealsAPI.Services
                     new Claim(ClaimTypes.NameIdentifier, userDTO.Id.ToString()),
                     new Claim(ClaimTypes.Name, userDTO.Name.ToString())
                 }),
-                Expires = DateTime.UtcNow.AddHours(2),
+                Expires = DateTime.UtcNow.AddHours(0.01),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);

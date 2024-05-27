@@ -44,6 +44,13 @@ namespace JobDealsAPI
             builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
             builder.Services.AddScoped<IAboutRepository, AboutRepository>();
             builder.Services.AddScoped<IExperienceRepository, ExperienceRepository>();
+            builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+            builder.Services.AddScoped<ICertificationRepository, CertificationRepository>();
+            builder.Services.AddScoped<ITechnologyRepository, TechnologyRepository>();
+            builder.Services.AddScoped<ILanguageRepository, LanguageRepository>();
+            builder.Services.AddScoped<IHardSkillRepository, HardSkillRepository>();
+            builder.Services.AddScoped<ISoftSkillRepository, SoftSkillRepository>();
+            builder.Services.AddScoped<IAcademicFormationRepository, AcademicFormationRepository>();
 
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
             builder.Services.AddAuthentication(x =>

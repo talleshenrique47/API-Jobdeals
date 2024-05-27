@@ -35,6 +35,21 @@ namespace JobDealsAPI.Repositories
                     .ThenInclude(p => p.About)
                 .Include(u => u.Profile)
                     .ThenInclude(p => p.Experiences)
+                .Include(u => u.Profile)
+                    .ThenInclude(p => p.Projects)
+                .Include(u => u.Profile)
+                    .ThenInclude(p => p.Certifications)
+                .Include(u => u.Profile)
+                    .ThenInclude(p => p.Technologies)
+                .Include(u => u.Profile)
+                    .ThenInclude(p => p.Languages)
+                .Include(u => u.Profile)
+                    .ThenInclude(p => p.HardSkills)
+                .Include(u => u.Profile)
+                    .ThenInclude(p => p.SoftSkills)
+                .Include(u => u.Profile)
+                    .ThenInclude(p => p.AcademicFormations)
+                    
                 // Adicione aqui outras inclusões, conforme necessário
                 // .Include(u => u.Profile.OtherRelatedEntity)
                 .FirstOrDefaultAsync(u => u.Id == id);

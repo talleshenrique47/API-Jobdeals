@@ -4,6 +4,7 @@ using JobDealsAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobDealsAPI.Migrations
 {
     [DbContext(typeof(JobDealsDBContex))]
-    partial class JobDealsDBContexModelSnapshot : ModelSnapshot
+    [Migration("20240527060450_HardSkillAndSoftSkillCreate")]
+    partial class HardSkillAndSoftSkillCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,37 +45,6 @@ namespace JobDealsAPI.Migrations
                         .IsUnique();
 
                     b.ToTable("Abouts");
-                });
-
-            modelBuilder.Entity("JobDealsAPI.Models.AcademicFormationModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CompletionDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Course")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Institution")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<int>("ProfileId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProfileId");
-
-                    b.ToTable("AcademicFormations");
                 });
 
             modelBuilder.Entity("JobDealsAPI.Models.CertificationModel", b =>
@@ -342,17 +313,6 @@ namespace JobDealsAPI.Migrations
                     b.Navigation("Profile");
                 });
 
-            modelBuilder.Entity("JobDealsAPI.Models.AcademicFormationModel", b =>
-                {
-                    b.HasOne("JobDealsAPI.Models.ProfileModel", "Profile")
-                        .WithMany("AcademicFormations")
-                        .HasForeignKey("ProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Profile");
-                });
-
             modelBuilder.Entity("JobDealsAPI.Models.CertificationModel", b =>
                 {
                     b.HasOne("JobDealsAPI.Models.ProfileModel", "Profile")
@@ -444,8 +404,6 @@ namespace JobDealsAPI.Migrations
             modelBuilder.Entity("JobDealsAPI.Models.ProfileModel", b =>
                 {
                     b.Navigation("About");
-
-                    b.Navigation("AcademicFormations");
 
                     b.Navigation("Certifications");
 

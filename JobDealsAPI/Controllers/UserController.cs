@@ -66,7 +66,46 @@ namespace JobDealsAPI.Controllers
                         Company = e.Company,
                         StartDate = e.StartDate,
                         EndDate = e.EndDate
-                    }).ToList() : new List<ExperienceDTO>()
+                    }).ToList() : new List<ExperienceDTO>(),
+                    Projects = user.Profile.Projects != null ? user.Profile.Projects.Select(p => new ProjectDTO
+                    {
+                        Id = p.Id,
+                        ProjectName = p.ProjectName
+                    }).ToList() : new List<ProjectDTO>(),
+                    Certifications = user.Profile.Certifications != null ? user.Profile.Certifications.Select(c => new CertificationDTO
+                    {
+                        Id = c.Id,
+                        CertificationName = c.CertificationName,
+                        ObtainedDate = c.ObtainedDate,
+                        Institution = c.Institution
+                    }).ToList() : new List<CertificationDTO>(),
+                    Technologies = user.Profile.Technologies != null ? user.Profile.Technologies.Select(t => new TechnologyDTO
+                    {
+                        Id = t.Id,
+                        TechnologyName = t.TechnologyName
+                    }).ToList() : new List<TechnologyDTO>(),
+                    Languages = user.Profile.Languages != null ? user.Profile.Languages.Select(l => new LanguageDTO
+                    {
+                        Id = l.Id,
+                        LanguageName = l.LanguageName
+                    }).ToList() : new List<LanguageDTO>(),
+                    HardSkills = user.Profile.HardSkills != null ? user.Profile.HardSkills.Select(h => new HardSkillDTO
+                    {
+                        Id = h.Id,
+                        HardSkillName = h.HardSkillName
+                    }).ToList() : new List<HardSkillDTO>(),
+                    SoftSkills = user.Profile.SoftSkills != null ? user.Profile.SoftSkills.Select(s => new SoftSkillDTO
+                    {
+                        Id = s.Id,
+                        SoftSkillName = s.SoftSkillName
+                    }).ToList() : new List<SoftSkillDTO>(),
+                    AcademicFormations = user.Profile.AcademicFormations != null ? user.Profile.AcademicFormations.Select(a => new AcademicFormationDTO
+                    {
+                        Id = a.Id,
+                        Institution = a.Institution,
+                        Course = a.Course,
+                        CompletionDate = a.CompletionDate
+                    }).ToList() : new List<AcademicFormationDTO>()
                 } : null
             };
 

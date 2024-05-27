@@ -1,0 +1,8 @@
+﻿namespace JobDealsAPI.Models.Dtos
+{
+    public class AboutDTO
+    {
+        public int Id { get; set; }
+        public string? Description { get; set; }
+    }
+}

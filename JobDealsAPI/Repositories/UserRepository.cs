@@ -28,6 +28,18 @@ namespace JobDealsAPI.Repositories
             return await _dbContext.Users.ToListAsync();
         }
 
+        public async Task<UserModel> GetUserWithDetails(int id)
+        {
+            return await _dbContext.Users
+                .Include(u => u.Profile)
+                    .ThenInclude(p => p.About)
+                .Include(u => u.Profile)
+                    .ThenInclude(p => p.Experiences)
+                // Adicione aqui outras inclusões, conforme necessário
+                // .Include(u => u.Profile.OtherRelatedEntity)
+                .FirstOrDefaultAsync(u => u.Id == id);
+        }
+
         public async Task<UserModel> Add(UserModel user)
         {
             try

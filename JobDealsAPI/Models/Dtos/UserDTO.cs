@@ -9,5 +9,6 @@ namespace JobDealsAPI.Models.Dtos
 
         [EmailAddress]
         public string? Email { get; set; }
+        public ProfileDTO? Profile { get; set; }
     }
 }

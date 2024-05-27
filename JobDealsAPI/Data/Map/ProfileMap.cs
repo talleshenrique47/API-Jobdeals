@@ -21,6 +21,11 @@ namespace JobDealsAPI.Data.Map
                    .HasForeignKey<ProfileModel>(p => p.UserId) // Chave estrangeira para UserId em ProfileModel
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(p => p.About)
+               .WithOne(a => a.Profile)
+               .HasForeignKey<AboutModel>(a => a.ProfileId)
+               .IsRequired(false);
         }
     }
 }

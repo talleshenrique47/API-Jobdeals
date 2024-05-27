@@ -17,5 +17,7 @@ namespace JobDealsAPI.Models
 
         public int UserId { get; set; }       
         public UserModel? User { get; set; } // Referência ao usuário
+        public AboutModel? About { get; internal set; }
+        public List<ExperienceModel>? Experiences { get; set; }
     }
 }

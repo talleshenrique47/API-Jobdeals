@@ -42,6 +42,8 @@ namespace JobDealsAPI
 
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
+            builder.Services.AddScoped<IAboutRepository, AboutRepository>();
+            builder.Services.AddScoped<IExperienceRepository, ExperienceRepository>();
 
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
             builder.Services.AddAuthentication(x =>

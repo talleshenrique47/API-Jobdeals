@@ -12,5 +12,7 @@ namespace JobDealsAPI.Models.Dtos
         public string? PhoneNumber { get; set; }
         public string? UserEmail { get; set; }
         public string? Github { get; set; }
+        public AboutDTO? About { get; set; }
+        public List<ExperienceDTO>? Experiences { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using JobDealsAPI.Models;
+using JobDealsAPI.Models.Dtos;
 using JobDealsAPI.Repositories.Interfaces;
 using JobDealsAPI.Services;
 using Microsoft.AspNetCore.Cors;
@@ -32,8 +33,44 @@ namespace JobDealsAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserModel>> SeachById(int id)
         {
-            UserModel user = await _userRepository.SeachById(id);
-            return Ok(user);
+            var user = await _userRepository.GetUserWithDetails(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userDTO = new UserDTO
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email,
+                Profile = user.Profile != null ? new ProfileDTO
+                {
+                    Id = user.Profile.Id,
+                    PhotoPath = user.Profile.PhotoPath,
+                    UserName = user.Profile.UserName,
+                    Title = user.Profile.Title,
+                    StatusDescription = user.Profile.StatusDescription,
+                    PhoneNumber = user.Profile.PhoneNumber,
+                    UserEmail = user.Profile.UserEmail,
+                    Github = user.Profile.Github,
+                    About = user.Profile.About != null ? new AboutDTO
+                    {
+                        Id = user.Profile.About.Id,
+                        Description = user.Profile.About.Description
+                    } : null,
+                    Experiences = user.Profile.Experiences != null ? user.Profile.Experiences.Select(e => new ExperienceDTO
+                    {
+                        Id = e.Id,
+                        JobTitle = e.JobTitle,
+                        Company = e.Company,
+                        StartDate = e.StartDate,
+                        EndDate = e.EndDate
+                    }).ToList() : new List<ExperienceDTO>()
+                } : null
+            };
+
+            return Ok(userDTO);
         }
 
         [HttpPost]
